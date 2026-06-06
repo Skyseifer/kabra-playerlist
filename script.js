@@ -7,7 +7,7 @@ let allPlayers = [];
 async function loadPlayers() {
     try {
 
-        const response = await fetch("/.netlify/functions/players");
+        const response = await fetch("/.netlify/functions/player");
 
         const players = await response.json();
 

@@ -11,6 +11,8 @@ async function loadPlayers() {
 
         const players = await response.json();
 
+        players.sort((a, b) => a.id - b.id);
+
         allPlayers = players;
 
         playerCount.textContent = players.length;

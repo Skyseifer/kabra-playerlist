@@ -85,14 +85,14 @@ function renderPlayers(players) {
 
         }).join("");
 
-        return `
-            <tr
-                <td>${player.id}</td>
-                <td>${player.name}</td>
-                <td>${player.ping}</td>
-                <td>${tagsHtml}</td>
-            </tr>
-        `;
+return `
+<tr>
+    <td>${player.id}</td>
+    <td>${player.name}</td>
+    <td>${player.ping}</td>
+    <td>TEST</td>
+</tr>
+`;
 
     }).join("");
 

@@ -40,7 +40,7 @@ async function loadPlayers() {
 
         playersTable.innerHTML = `
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     Error al cargar los jugadores
                 </td>
             </tr>

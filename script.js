@@ -86,7 +86,7 @@ function renderPlayers(players) {
         }).join("");
 
         return `
-            <tr onclick="editTags('${player.name}')">
+            <tr
                 <td>${player.id}</td>
                 <td>${player.name}</td>
                 <td>${player.ping}</td>

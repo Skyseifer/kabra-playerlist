@@ -125,3 +125,20 @@ function editTags(playerName) {
 
     loadPlayers();
 }
+searchInput.addEventListener("input", () => {
+
+    const search = searchInput.value.toLowerCase();
+
+    const filtered = allPlayers
+        .filter(player =>
+            player.name.toLowerCase().includes(search)
+        )
+        .sort((a, b) => a.id - b.id);
+
+    renderPlayers(filtered);
+
+});
+
+loadPlayers();
+
+setInterval(loadPlayers, 30000);

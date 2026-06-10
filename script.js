@@ -90,7 +90,7 @@ return `
     <td>${player.id}</td>
     <td>${player.name}</td>
     <td>${player.ping}</td>
-    <td>TEST</td>
+    <td>-</td>
 </tr>
 `;
 

@@ -1,3 +1,18 @@
+const TAGS = {
+    lspd: { name: "LSPD", color: "#1565C0" },
+    sams: { name: "SAMS", color: "#FFD600" },
+    staff: { name: "STAFF", color: "#FFB300" },
+    la958: { name: "LA 958", color: "#FF69B4" },
+    teku: { name: "TEKU", color: "#8E24AA" },
+    losrana: { name: "LOS RANA", color: "#1B5E20" },
+    rolling60: { name: "60TH ROLLING", color: "#42A5F5" },
+    demc: { name: "D.E. MC", color: "#212121" },
+    tsl: { name: "TSL", color: "#F5F5F5", textColor: "#000" }
+};
+
+let playerTags = JSON.parse(
+    localStorage.getItem("kabra-tags") || "{}"
+);
 const playerCount = document.getElementById("playerCount");
 const playersTable = document.getElementById("playersTable");
 const searchInput = document.getElementById("searchInput");

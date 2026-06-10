@@ -101,7 +101,7 @@ body{
 .players-section{
     background:#171c24;
     border-radius:15px;
-    overflow:hidden;
+    overflow-x:auto;
 }
 
 table{
@@ -117,15 +117,49 @@ thead{
 th{
     padding:15px;
     text-align:left;
+    font-weight:bold;
 }
 
 td{
     padding:15px;
     border-bottom:1px solid rgba(255,255,255,0.05);
+    vertical-align:middle;
 }
 
 tbody tr:hover{
     background:#202734;
+}
+
+/* Anchos de columnas */
+th:nth-child(1),
+td:nth-child(1){
+    width:70px;
+}
+
+th:nth-child(2),
+td:nth-child(2){
+    width:45%;
+}
+
+th:nth-child(3),
+td:nth-child(3){
+    width:90px;
+}
+
+th:nth-child(4),
+td:nth-child(4){
+    min-width:250px;
+}
+
+/* Etiquetas de facción */
+.tag{
+    display:inline-block;
+    padding:5px 10px;
+    margin:2px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    white-space:nowrap;
 }
 
 footer{
@@ -145,46 +179,14 @@ footer{
         width:100%;
     }
 
+    table{
+        min-width:700px;
+    }
+
     th,
     td{
         padding:10px;
         font-size:14px;
     }
 
-}
-.tag {
-    display: inline-block;
-    padding: 4px 10px;
-    margin: 2px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-#playersTable tr {
-    cursor: pointer;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 10px;
-    text-align: left;
-}
-
-td:last-child {
-    min-width: 250px;
-}
-
-.tag {
-    display: inline-block;
-    padding: 4px 10px;
-    margin: 2px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
 }

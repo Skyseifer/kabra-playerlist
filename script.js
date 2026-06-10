@@ -13,6 +13,7 @@ const TAGS = {
 let playerTags = JSON.parse(
     localStorage.getItem("kabra-tags") || "{}"
 );
+
 const playerCount = document.getElementById("playerCount");
 const playersTable = document.getElementById("playersTable");
 const searchInput = document.getElementById("searchInput");
@@ -23,7 +24,6 @@ async function loadPlayers() {
     try {
 
         const response = await fetch("/.netlify/functions/player");
-
         const players = await response.json();
 
         players.sort((a, b) => a.id - b.id);
@@ -53,11 +53,11 @@ function renderPlayers(players) {
     if (players.length === 0) {
 
         playersTable.innerHTML = `
-        <tr>
-            <td colspan="4">
-                No hay jugadores conectados
-            </td>
-        </tr>
+            <tr>
+                <td colspan="4">
+                    No hay jugadores conectados
+                </td>
+            </tr>
         `;
 
         return;
@@ -85,16 +85,31 @@ function renderPlayers(players) {
 
         }).join("");
 
-return `
-<tr>
-    <td>${player.id}</td>
-    <td>${player.name}</td>
-    <td>${player.ping}</td>
-    <td>-</td>
-</tr>
-`;
+        return `
+            <tr class="player-row" data-player="${encodeURIComponent(player.name)}">
+                <td>${player.id}</td>
+                <td>${player.name}</td>
+                <td>${player.ping}</td>
+                <td>${tagsHtml}</td>
+            </tr>
+        `;
 
     }).join("");
+
+    // Activar clic en cada fila
+    document.querySelectorAll(".player-row").forEach(row => {
+
+        row.addEventListener("click", () => {
+
+            const playerName = decodeURIComponent(
+                row.dataset.player
+            );
+
+            editTags(playerName);
+
+        });
+
+    });
 
 }
 
@@ -105,9 +120,17 @@ function editTags(playerName) {
 
     const result = prompt(
         `Facciones para ${playerName}\n\n` +
-        `Opciones:\n` +
-        `lspd\nsams\nstaff\nla958\nteku\nlosrana\nrolling60\ndemc\ntsl\n\n` +
-        `Separar con comas`,
+        `Opciones:\n\n` +
+        `lspd\n` +
+        `sams\n` +
+        `staff\n` +
+        `la958\n` +
+        `teku\n` +
+        `losrana\n` +
+        `rolling60\n` +
+        `demc\n` +
+        `tsl\n\n` +
+        `Puedes poner varias separadas por comas`,
         current
     );
 
@@ -115,7 +138,7 @@ function editTags(playerName) {
 
     playerTags[playerName] = result
         .split(",")
-        .map(x => x.trim())
+        .map(x => x.trim().toLowerCase())
         .filter(x => TAGS[x]);
 
     localStorage.setItem(
@@ -123,8 +146,9 @@ function editTags(playerName) {
         JSON.stringify(playerTags)
     );
 
-    loadPlayers();
+    renderPlayers(allPlayers);
 }
+
 searchInput.addEventListener("input", () => {
 
     const search = searchInput.value.toLowerCase();

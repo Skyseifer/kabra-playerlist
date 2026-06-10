@@ -87,3 +87,31 @@ searchInput.addEventListener("input", () => {
 loadPlayers();
 
 setInterval(loadPlayers, 10000);
+
+function editTags(playerName) {
+
+    const current =
+        (playerTags[playerName] || []).join(",");
+
+    const result = prompt(
+        `Facciones para ${playerName}\n\n` +
+        `Opciones:\n` +
+        `lspd\nsams\nstaff\nla958\nteku\nlosrana\nrolling60\ndemc\ntsl\n\n` +
+        `Separar con comas`,
+        current
+    );
+
+    if (result === null) return;
+
+    playerTags[playerName] = result
+        .split(",")
+        .map(x => x.trim())
+        .filter(x => TAGS[x]);
+
+    localStorage.setItem(
+        "kabra-tags",
+        JSON.stringify(playerTags)
+    );
+
+    loadPlayers();
+}

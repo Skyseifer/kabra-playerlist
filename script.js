@@ -53,40 +53,50 @@ function renderPlayers(players) {
     if (players.length === 0) {
 
         playersTable.innerHTML = `
-            <tr>
-                <td colspan="3">
-                    No hay jugadores conectados
-                </td>
-            </tr>
+        <tr>
+            <td colspan="4">
+                No hay jugadores conectados
+            </td>
+        </tr>
         `;
 
         return;
     }
 
-    playersTable.innerHTML = players.map(player => `
-        <tr>
-            <td>${player.id}</td>
-            <td>${player.name}</td>
-            <td>${player.ping}</td>
-        </tr>
-    `).join("");
+    playersTable.innerHTML = players.map(player => {
+
+        const tags = playerTags[player.name] || [];
+
+        const tagsHtml = tags.map(tag => {
+
+            const info = TAGS[tag];
+
+            return `
+                <span
+                    class="tag"
+                    style="
+                        background:${info.color};
+                        color:${info.textColor || '#fff'};
+                    "
+                >
+                    ${info.name}
+                </span>
+            `;
+
+        }).join("");
+
+        return `
+            <tr onclick="editTags('${player.name}')">
+                <td>${player.id}</td>
+                <td>${player.name}</td>
+                <td>${player.ping}</td>
+                <td>${tagsHtml}</td>
+            </tr>
+        `;
+
+    }).join("");
+
 }
-
-searchInput.addEventListener("input", () => {
-
-    const search = searchInput.value.toLowerCase();
-
-    const filtered = allPlayers.filter(player =>
-        player.name.toLowerCase().includes(search)
-    );
-
-    renderPlayers(filtered);
-
-});
-
-loadPlayers();
-
-setInterval(loadPlayers, 10000);
 
 function editTags(playerName) {
 
